@@ -56,7 +56,7 @@ define vagrant::package (
   }
 
   # Set file suffix according to the architecture
-  case $::architecture {
+  case $facts['os']['architecture'] {
     'x86_64', 'amd64': {
       $arch_suffix = 'x86_64'
     }
@@ -64,12 +64,12 @@ define vagrant::package (
       $arch_suffix = 'i686'
     }
     default: {
-      fail("Unsupported architecture: ${::architecture}")
+      fail("Unsupported architecture: $facts['os']['architecture']")
     }
   }
 
   # Finally determine download url
-  case $::osfamily {
+  case $facts['os']['family'] {
     'redhat': {
       $vagrant_source = $source ? {
         undef   => "${base_url}/vagrant_${version_real}_${arch_suffix}.rpm",
@@ -113,7 +113,7 @@ define vagrant::package (
       }
     }
     default: {
-      fail("Unsupported OS family: ${::osfamily}")
+      fail("Unsupported OS family: $facts['os']['family']")
     }
   }
 
