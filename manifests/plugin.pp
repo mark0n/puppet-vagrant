@@ -57,18 +57,16 @@
 #
 
 define vagrant::plugin (
-  $ensure       = present,
-  $plugin       = $title,
-  $version      = undef,
-  $user         = $::id,
-  $source       = undef,
-  $prerelease   = false,
-  $entry_point  = undef,
-  $path         = undef,
-  $timeout      = 0
+  $ensure             = present,
+  $plugin             = $title,
+  $version            = undef,
+  $user               = $::id,
+  $source             = undef,
+  Boolean $prerelease = false,
+  $entry_point        = undef,
+  $path               = undef,
+  $timeout            = 0
 ) {
-
-  validate_bool($prerelease)
 
   $check_cmd = "${vagrant::params::vagrant} plugin list | ${vagrant::params::grep} \"^${plugin} \""
 

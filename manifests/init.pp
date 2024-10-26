@@ -37,15 +37,13 @@
 #
 
 class vagrant (
-  $version                = $vagrant::params::version,
-  $ensure                 = $vagrant::params::ensure,
-  $install_from_source    = $vagrant::params::install_from_source,
-  $source                 = $vagrant::params::source,
-  $provider               = $vagrant::params::provider,
-  $path                   = $vagrant::params::path
+  $version                     = $vagrant::params::version,
+  $ensure                      = $vagrant::params::ensure,
+  Boolean $install_from_source = $vagrant::params::install_from_source,
+  $source                      = $vagrant::params::source,
+  $provider                    = $vagrant::params::provider,
+  $path                        = $vagrant::params::path
 ) inherits vagrant::params {
-
-  validate_bool($install_from_source)
 
   if $install_from_source {
     vagrant::package {"vagrant-${version}":
